@@ -1,0 +1,42 @@
+<%- include("header") %>
+
+<body>
+
+    <h1>Welcome to my Website</h1>
+
+
+    <div>
+        <form action="/meal" method="Post">
+
+            <label for="name">What did you eat: </label>
+            <input type="text" name="name" id="name"><br><br>
+            <label for="source">Where is it from: </label>
+            <input type="text" name="source" id="source"><br><br>
+            <label for="ingredients">Ingredients: </label>
+            <textarea id="ingredients" name="ingredients" placeholder="Input separated by commas" cols="75" rows="5"></textarea><br><br>
+
+            <button type="submit">Submit</button>
+
+
+        </form>
+
+    </div>
+
+    <div>
+        <form action="/bm" method="POST">
+
+            <label for="bmRating">What is the rating for the BM: </label>
+            <input type="number" id="bmRating" name="bmRating" max="7" min="1">
+            <p>
+                <a href="https://dfwgidoctor.com/2019/09/27/poop-says-about-your-health/">Guidance on the type scales</a>
+            </p>
+
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+
+
+
+
+<%- include("footer") %>
