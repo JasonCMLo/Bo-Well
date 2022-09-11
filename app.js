@@ -1,5 +1,10 @@
 const { default: mongoose } = require("mongoose");
 
+
+require('dotenv').config()
+
+
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
@@ -8,7 +13,9 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect("mongodb+srv://Jason:jasonMDB@cluster0.tstbsbq.mongodb.net/boWell")
+const mongoKey = process.env.MongoAPI
+
+mongoose.connect("mongodb+srv://Jason:"+mongoKey+"@cluster0.tstbsbq.mongodb.net/boWell")
 
 const MealSchema = {
     name: [String],
