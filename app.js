@@ -48,55 +48,51 @@ app.get("/", function (req, res) {
 
 app.post("/:postType", function (req, res) {
   const input = req.body;
-
-  console.log(input);
-
   const today = new Date();
-
   const options = {
     day: "numeric",
     month: "short",
     year: "numeric",
   };
-
   const currDate = today.toLocaleDateString("en-US", options);
-
   const postType = req.params.postType;
 
   Log.findOne({ day: currDate }, function (err, results) {
-    if (!results) {
-      const mdb_date = new Log({
-        day: currDate,
-        user: input.user,
-      });
-      mdb_date.save();
-    }
-
     if (postType === "meal") {
-      let newMeal = new Meal({
+      var newMeal = new Meal({
         name: input.name,
         source: input.source,
         ingredients: input.ingredients.split(),
       });
-      console.log(newMeal);
-
-      results.meals.push(newMeal);
-      results.save();
-
-      res.redirect("/");
-    }
-
-    if (postType === "bm") {
-      let newBM = new BM({
+    } else if (postType === "bm") {
+      var newBM = new BM({
         rating: input.bmRating,
       });
+    }
 
-      results.bms.push(newBM);
+    if (!results) {
+      const mdb_date = new Log({
+        dat: currDate,
+        user: input.user,
+      });
+      if (postType === "meal") {
+        mdb_date.meals.push(newMeal);
+      } else if (postType === "bm") {
+        mdb_date.meals.push(newBM);
+      }
+
+      mdb_date.save();
+    } else {
+      if (postType === "meal") {
+        results.meals.push(newMeal);
+      } else if (postType === "bm") {
+        results.bms.push(newBM);
+      }
       results.save();
-
-      res.redirect("/");
     }
   });
+
+  res.redirect("/");
 });
 
 app.listen(3000, function () {
