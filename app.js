@@ -34,7 +34,7 @@ const Meal = mongoose.model("meal", MealSchema);
 const BM = mongoose.model("bm", bmSchema);
 
 const DaySchema = {
-  day: Date,
+  day: { type: Date, required: true },
   meals: [MealSchema],
   bms: [bmSchema],
   user: { type: String, required: true },
@@ -44,6 +44,10 @@ const Log = mongoose.model("Log", DaySchema);
 
 app.get("/", function (req, res) {
   res.render("main");
+});
+
+app.get("/about", function (req, res) {
+  res.render("about");
 });
 
 app.post("/:postType", function (req, res) {
@@ -72,7 +76,7 @@ app.post("/:postType", function (req, res) {
 
     if (!results) {
       const mdb_date = new Log({
-        dat: currDate,
+        day: currDate,
         user: input.user,
       });
       if (postType === "meal") {
@@ -80,6 +84,8 @@ app.post("/:postType", function (req, res) {
       } else if (postType === "bm") {
         mdb_date.meals.push(newBM);
       }
+
+      console.log(mdb_date);
 
       mdb_date.save();
     } else {

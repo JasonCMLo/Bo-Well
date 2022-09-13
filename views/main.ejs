@@ -1,49 +1,59 @@
 <%- include("header") %>
 
-<body>
-
-    <h1>Welcome to my Website</h1>
+    <div class="container">
 
 
-    <div>
-        <form action="/meal" method="Post">
+        <div class="row">
+            <div class="col-12">
+                <form action="/meal" method="Post">
+                    <fieldset>
+                        <legend>Food</legend>
+                        <div class="form group">
+                            <label for="name">What did you eat: </label>
+                            <input type="text" name="name" id="name" class="form-control">
+                            <label for="source">Where is it from: </label>
+                            <input type="text" name="source" id="source" class="form-control">
+                            <label for="ingredients">Ingredients: </label>
+                            <textarea id="ingredients" name="ingredients" placeholder="Input separated by commas" cols="75" rows="5" class="form-control"></textarea>
+                        </div>
+                        <div class="form group">
+                            <label for="user">User: </label>
+                            <input type="text" name="user" id="user" class="form-control">
+            
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>              
+                    </fieldset>
 
-            <label for="name">What did you eat: </label>
-            <input type="text" name="name" id="name"><br><br>
-            <label for="source">Where is it from: </label>
-            <input type="text" name="source" id="source"><br><br>
-            <label for="ingredients">Ingredients: </label>
-            <textarea id="ingredients" name="ingredients" placeholder="Input separated by commas" cols="75" rows="5"></textarea><br><br>
+                </form>
 
-            <label for="user">User: </label>
-            <input type="text" name="user" id="user"> <br><br>
+            </div>
+        </div>
 
-            <button type="submit">Submit</button>
+        <div class="row">
+            <div class="col-12">
+                <form action="/bm" method="POST">
+                    <fieldset>
+                        <legend>Poops</legend>
+                        
+                        <div class="form group">
+                            <label for="bmRating">What is the rating for the BM: </label> <br>
+                            <small id="bmHelp" class="form-text text-muted"> <a href="https://dfwgidoctor.com/2019/09/27/poop-says-about-your-health/">Guidance on the type scales</a> </small>
 
+                            <input type="number" id="bmRating" name="bmRating" max="7" min="1" class="form-control">
+                
+                            <label for="user">User: </label>
+                            <input type="text" name="user" id="user" class="form-control">
+                
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                </fieldset>
 
-        </form>
-
+        
+                </form>
+            </div>
+        </div>
+        
     </div>
-
-    <div>
-        <form action="/bm" method="POST">
-
-            <label for="bmRating">What is the rating for the BM: </label>
-            <input type="number" id="bmRating" name="bmRating" max="7" min="1">
-            <p>
-                <a href="https://dfwgidoctor.com/2019/09/27/poop-says-about-your-health/">Guidance on the type scales</a>
-            </p>
-
-            <label for="user">User: </label>
-            <input type="text" name="user" id="user"> <br><br>
-
-            <button type="submit">Submit</button><br><br>
-
-        </form>
-
-    </div>
-
-
 
 
 <%- include("footer") %>

@@ -1,0 +1,32 @@
+body {
+  padding-top: 5rem;
+}
+
+.main-form {
+  padding: 3rem 1.5rem;
+  width: 60%;
+  margin: auto;
+}
+
+.form-control {
+  margin: 0.5rem;
+}
+
+.btn {
+  width: 10%;
+}
+
+label {
+  margin: 0.25rem;
+}
+
+.row {
+  margin-bottom: 5rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+}
