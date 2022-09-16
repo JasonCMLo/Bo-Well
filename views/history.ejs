@@ -7,57 +7,23 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                Test
-                </div>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-        </div>
 
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                Test
+        <% meals.forEach(element => { %>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                    <%= element.name %> 
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <% element.ingredients.forEach(element => { %>
+                            <li class="list-group-item"> <%= element %> </li>
+                        <% }) %>  
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
             </div>
-        </div>
+        <% }); %>
+        
 
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                Test
-                </div>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                Test
-                </div>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-        </div>
     </div>
 </div>
 

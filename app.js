@@ -51,7 +51,20 @@ app.get("/about", function (req, res) {
 });
 
 app.get("/history", function (req, res) {
-  res.render("history");
+  const today = new Date();
+  const options = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  };
+
+  const currDate = today.toLocaleDateString("en-US", options);
+
+  const currLog = Log.findOne({ day: currDate }, function (err, results) {
+    const currMeals = results.meals;
+
+    res.render("history", { meals: currMeals });
+  });
 });
 
 app.post("/:postType", function (req, res) {
@@ -74,7 +87,7 @@ app.post("/:postType", function (req, res) {
       var newMeal = new Meal({
         name: input.name,
         source: input.source,
-        ingredients: input.ingredients.split(),
+        ingredients: input.ingredients.split(","),
       });
     } else if (postType === "bm") {
       var newBM = new BM({
