@@ -50,6 +50,10 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
+app.get("/history", function (req, res) {
+  res.render("history");
+});
+
 app.post("/:postType", function (req, res) {
   const input = req.body;
   const today = new Date();
@@ -58,7 +62,11 @@ app.post("/:postType", function (req, res) {
     month: "short",
     year: "numeric",
   };
+
+  const yesterday = new Date(2022, 8, 13);
+
   const currDate = today.toLocaleDateString("en-US", options);
+  //const currDate = yesterday.toLocaleDateString("en-US", options);
   const postType = req.params.postType;
 
   Log.findOne({ day: currDate }, function (err, results) {
