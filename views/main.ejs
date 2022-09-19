@@ -1,14 +1,14 @@
 <%- include("header") %>
 
     <div class="container">
-
-
         <div class="row">
             <div class="col-12">
                 <form action="/meal" method="Post">
                     <fieldset>
                         <legend>Food</legend>
                         <div class="form group">
+                            <label for="currDate">Date: </label>
+                            <input type="date" name ="currDate" id="currDate" class="form-control">
                             <label for="name">What did you eat: </label>
                             <input type="text" name="name" id="name" class="form-control">
                             <label for="source">Where is it from: </label>
@@ -36,6 +36,9 @@
                         <legend>Poops</legend>
                         
                         <div class="form group">
+                            <label for="currDateBM">Date: </label>
+                            <input type="date" name ="currDateBM" id="currDateBM" class="form-control">
+
                             <label for="bmRating">What is the rating for the BM: </label> <br>
                             <small id="bmHelp" class="form-text text-muted"> <a href="https://dfwgidoctor.com/2019/09/27/poop-says-about-your-health/">Guidance on the type scales</a> </small>
 

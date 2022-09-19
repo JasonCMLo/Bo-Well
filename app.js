@@ -50,39 +50,42 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
+let historyDate = new Date();
+
 app.get("/history", function (req, res) {
-  const today = new Date();
-  const options = {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  };
+  const currLog = Log.findOne({ day: historyDate }, function (err, results) {
+    if (!results) {
+      res.render("history", { meals: [], day: "" });
 
-  const currDate = today.toLocaleDateString("en-US", options);
+      console.log("no");
+    } else {
+      console.log("yes");
+      const currMeals = results.meals;
 
-  const currLog = Log.findOne({ day: currDate }, function (err, results) {
-    const currMeals = results.meals;
+      console.log(currMeals);
 
-    res.render("history", { meals: currMeals });
+      res.render("history", { meals: currMeals, day: historyDate });
+    }
   });
+});
+
+app.post("/history", function (req, res) {
+  historyDate = req.body.histDate;
+
+  res.redirect("history");
 });
 
 app.post("/:postType", function (req, res) {
   const input = req.body;
-  const today = new Date();
-  const options = {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  };
 
-  const yesterday = new Date(2022, 8, 13);
+  console.log(input);
+  const day = new Date(input.currDate || input.currDateBM);
 
-  const currDate = today.toLocaleDateString("en-US", options);
-  //const currDate = yesterday.toLocaleDateString("en-US", options);
+  console.log(input);
+
   const postType = req.params.postType;
 
-  Log.findOne({ day: currDate }, function (err, results) {
+  Log.findOne({ day: day }, function (err, results) {
     if (postType === "meal") {
       var newMeal = new Meal({
         name: input.name,
@@ -97,7 +100,7 @@ app.post("/:postType", function (req, res) {
 
     if (!results) {
       const mdb_date = new Log({
-        day: currDate,
+        day: day,
         user: input.user,
       });
       if (postType === "meal") {
@@ -105,8 +108,6 @@ app.post("/:postType", function (req, res) {
       } else if (postType === "bm") {
         mdb_date.meals.push(newBM);
       }
-
-      console.log(mdb_date);
 
       mdb_date.save();
     } else {
@@ -125,3 +126,13 @@ app.post("/:postType", function (req, res) {
 app.listen(3000, function () {
   console.log("Server running on port 3000");
 });
+
+// const UserSchema = {
+//   name: String,
+//   pw: String,
+// };
+
+// const User = mongoose.model("user", UserSchema);
+
+// const newUser = new User({ name: "Jason", pw: "pw123" });
+// newUser.save();
